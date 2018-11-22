@@ -22,4 +22,7 @@ function main()
 
     image_orientation
 
+    % Features extraction
+    featuresExtraction(image_seg);
+
 end
