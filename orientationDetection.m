@@ -49,8 +49,9 @@ function orientation = orientationDetection (rb,rt,colr,coll,image)
     % if both methods agree, so there is a orientation of the hand
     if strcmp(method_one, method_two)
         orientation = method_one;
+    % if not, an error is raised
     else
-        % TODO: THERE IS A PROBLEM !!!!
+        error('Problems to determine hand orientation. Methods do not match.')
     end
 
 end

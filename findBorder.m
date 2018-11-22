@@ -19,7 +19,7 @@ function [row,column] = findBorder(image,type)
                 if image(i,j) == 1
                     row = i;
                     column = j;
-                    break;
+                    return;
                 end         
             end
         end
@@ -30,7 +30,7 @@ function [row,column] = findBorder(image,type)
                 if image(i,j) == 1
                     row = i;
                     column = j;
-                    break;
+                    return;
                 end         
             end
         end
@@ -41,7 +41,7 @@ function [row,column] = findBorder(image,type)
                 if image(i,j) == 1
                     row = i;
                     column = j;
-                    break;
+                    return;
                 end         
             end
         end
@@ -52,7 +52,7 @@ function [row,column] = findBorder(image,type)
                 if image(i,j) == 1
                     row = i;
                     column = j;
-                    break;
+                    return;
                 end         
             end
         end

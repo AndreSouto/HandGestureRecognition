@@ -11,14 +11,15 @@ function main()
     %TODO: Fazer para varias imagens
 
     % Reading images
-    filename = ['./images/A-complex04.ppm']
+    filename = './images/A-complex04.ppm';
     image_rgb = imread(filename);
     
     % Hand segmentation
-    %image_seg = imageSegmentation(image_rgb);
-    %image_seg = image_rgb;
+    [rb,rt,colr,coll,image_seg] = imageSegmentation(image_rgb);
 
     % Hand orientation detection
-    %orientationDetection(image_seg);
+    image_orientation = orientationDetection(rb,rt,colr,coll,image_seg);
+
+    image_orientation
 
 end
