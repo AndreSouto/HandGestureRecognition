@@ -5,53 +5,53 @@
 %     image - binary image
 %     type - top, bottom, right or left border 
 %   Output:
-%     x - x border
-%     y - y border
+%     row - y border
+%     column - x border
 
-function [x,y] = findBorder(image,type)
+function [row,column] = findBorder(image,type)
 
     [r,c] = size(image);
 
     % Top border
     if strcmp(type,'top')
-        for i=1:1:r
-            for j=1:1:c
+        for i = 1:1:r
+            for j = 1:1:c
                 if image(i,j) == 1
-                    x = i;
-                    y = j;
+                    row = i;
+                    column = j;
                     break;
                 end         
             end
         end
     % Bottom border
     elseif strcmp(type,'bottom')
-        for i=r:(-1):1
-            for j=1:1:c
+        for i = r:(-1):1
+            for j = 1:1:c
                 if image(i,j) == 1
-                    x = i;
-                    y = j;
+                    row = i;
+                    column = j;
                     break;
                 end         
             end
         end
     % Right border
     elseif strcmp(type,'right')
-        for j=c:(-1):1
-            for i=1:1:r
+        for j = c:(-1):1
+            for i = 1:1:r
                 if image(i,j) == 1
-                    x = i;
-                    y = j;
+                    row = i;
+                    column = j;
                     break;
                 end         
             end
         end
     % Left border
     elseif strcmp(type,'left')   
-        for j=1:1:c
-            for i=1:1:r
+        for j = 1:1:c
+            for i = 1:1:r
                 if image(i,j) == 1
-                    x = i;
-                    y = j;
+                    row = i;
+                    column = j;
                     break;
                 end         
             end

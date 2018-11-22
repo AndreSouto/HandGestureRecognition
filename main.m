@@ -16,9 +16,9 @@ function main()
     
     % Hand segmentation
     %image_seg = imageSegmentation(image_rgb);
-    image_seg = image_rgb;
+    %image_seg = image_rgb;
 
     % Hand orientation detection
-    orientationDetection(image_seg);
+    %orientationDetection(image_seg);
 
 end
