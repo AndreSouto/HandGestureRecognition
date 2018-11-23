@@ -21,10 +21,14 @@ function gesture = interpretation (bits, orientation)
             gesture = 'Point';
         elseif bits == [0 0 1 1 0]
             gesture = 'V';
+        else
+            gesture = 'none';
         end
     elseif strcmp(orientation,'horizontal')
         if bits == [1 1 1 1 1]
             gesture = 'B';
+        else
+            gesture = 'none';
         end
     end
 
