@@ -20,9 +20,7 @@ function main()
     % Hand orientation detection
     image_orientation = orientationDetection(rb,rt,colr,coll,image_seg);
 
-    image_orientation
-
     % Features extraction
-    featuresExtraction(rb,rt,colr,coll,image_seg);
+    featuresExtraction(rb,rt,colr,coll,image_seg,image_orientation);
 
 end
