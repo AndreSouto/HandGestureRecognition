@@ -4,7 +4,7 @@
 
 % Rafaela Sinhoroto - %
 % André Luis Souto - 140016261 %
-% Raphael %
+% Raphael Soares Ramos - 14/0160299%
 
 function main()
     
@@ -26,5 +26,7 @@ function main()
     % Classification and bits generation
     bits = classification(thumb_side,ed);
     
-    bits
+    % Interpretation of bits array
+    res = interpretation (bits, orientation);
+
 end
