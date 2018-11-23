@@ -24,6 +24,7 @@ function main()
     [thumb_side, ed] = featuresExtraction(rb,rt,colr,coll,image_seg,image_orientation);
 
     % Classification and bits generation
-    classification(thumb_side,ed);
-
+    bits = classification(thumb_side,ed);
+    
+    bits
 end

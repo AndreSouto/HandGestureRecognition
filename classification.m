@@ -19,6 +19,20 @@ function bits = classification (thumb_side, ed)
         % Do nothing
     end
 
+    % Setting bits depending on ed vector
+    for i = 1:1:4
+        if ed(i) ~= -1
+            bits(i + 1) = 1;
+        else
+            bits(i + 1) = 0;
+        end
+    end
     
-
+    % In case thumb was not detected, but there is a peak corresponding
+    % to the thumb, the bit can be set up
+    [r,c] = size(ed);
+    if (bits(1) == 0) && (c > 4) && (ed(c) ~= -1)
+        bits(1) = 1;
+    end
+    
 end
