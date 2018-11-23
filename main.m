@@ -21,6 +21,9 @@ function main()
     image_orientation = orientationDetection(rb,rt,colr,coll,image_seg);
 
     % Features extraction
-    featuresExtraction(rb,rt,colr,coll,image_seg,image_orientation);
+    [thumb_side, ed] = featuresExtraction(rb,rt,colr,coll,image_seg,image_orientation);
+
+    % Classification and bits generation
+    classification(thumb_side,ed);
 
 end

@@ -9,9 +9,10 @@
 %     coll - left border column
 %     image_orientation - vertical/horizontal
 %   Output:
-%     
+%     thumb_side - thumb detection
+%     ed - significant peaks
 
-function featuresExtraction (rb,rt,colr,coll,image,image_orientation)
+function [thumb_side, ed] = featuresExtraction (rb,rt,colr,coll,image,image_orientation)
 
     % 1) Centroid
     [crow,ccol] = centroid (image);
@@ -29,13 +30,13 @@ function featuresExtraction (rb,rt,colr,coll,image,image_orientation)
     % a threshold (75% of the highest peak). The peaks with 
     % ed smaller than this threshold will be considered insignificants.
     % Insignificant peaks/folded fingers are marked as -1
+    indices = find(ed == 0);
+    ed(indices) = [];
+
     threshold = 0.75 * max(ed);
     [r,c] = size(ed);
 
-    for i = 1:1:c
-        if ed(i) < threshold
-            ed(i) = -1;
-        end
-    end
+    indices = find(ed < threshold);
+    ed(indices) = -1;
 
 end
