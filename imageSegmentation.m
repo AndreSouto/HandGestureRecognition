@@ -17,7 +17,7 @@ function [rb,rt,colr,coll,segmented] = imageSegmentation(image_rgb)
   
     % TODO: K-means para clusterizar
     %%%% for testing purposes only TODO : remove %%%%%%%
-    filename = './images/bin_hand_to_test_only.png';
+    filename = './images/00000_hand_to_test_only.png';
     image_seg = imread(filename);
     [r,c] = size(image_seg);
     image_seg = im2double(image_seg);
@@ -30,6 +30,9 @@ function [rb,rt,colr,coll,segmented] = imageSegmentation(image_rgb)
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
+    % Filling holes in the image
+    image_seg = imfill(image_seg);
+
     segmented = image_seg;
     % Top border coordinates
     [rt,colt] = findBorder(image_seg,'top');

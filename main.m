@@ -27,6 +27,6 @@ function main()
     bits = classification(thumb_side,ed);
     
     % Interpretation of bits array
-    res = interpretation (bits, orientation);
+    gesture = interpretation (bits, image_orientation);
 
 end

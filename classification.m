@@ -10,11 +10,11 @@
 
 function bits = classification (thumb_side, ed)
     
-    % Array that represents the fingers. Leftmost bit represents thumb
+    % Array that represents the fingers. Rightmost bit represents thumb
     bits = [1 1 1 1 1];
 
     if strcmp(thumb_side,'none')
-        bits(1) = 0;
+        bits(5) = 0;
     else
         % Do nothing
     end
@@ -22,17 +22,17 @@ function bits = classification (thumb_side, ed)
     % Setting bits depending on ed vector
     for i = 1:1:4
         if ed(i) ~= -1
-            bits(i + 1) = 1;
+            bits(i) = 1;
         else
-            bits(i + 1) = 0;
+            bits(i) = 0;
         end
     end
     
     % In case thumb was not detected, but there is a peak corresponding
     % to the thumb, the bit can be set up
     [r,c] = size(ed);
-    if (bits(1) == 0) && (c > 4) && (ed(c) ~= -1)
-        bits(1) = 1;
+    if (bits(5) == 0) && (c > 4) && (ed(c) ~= -1)
+        bits(5) = 1;
     end
     
 end
