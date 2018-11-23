@@ -14,13 +14,28 @@
 function featuresExtraction (rb,rt,colr,coll,image,image_orientation)
 
     % 1) Centroid
-    [crow,ccol] = centroid(image);
+    [crow,ccol] = centroid (image);
 
     % 2) Thumb detection
     thumb_side = thumbDetection (rb,rt,colr,coll,image);
 
     % 3) Finger region detection
-    [a,b] = fingerDetection (image,image_orientation);
+    [x,y] = fingerDetection (image,image_orientation);
 
     % 4) Euclidean distance
+     ed = euclideanDistance (x,y,crow,ccol);
+
+    % With euclidean distance vector, it is possible to determine
+    % a threshold (75% of the highest peak). The peaks with 
+    % ed smaller than this threshold will be considered insignificants.
+    % Insignificant peaks/folded fingers are marked as -1
+    threshold = 0.75 * max(ed);
+    [r,c] = size(ed);
+
+    for i = 1:1:c
+        if ed(i) < threshold
+            ed(i) = -1;
+        end
+    end
+
 end
