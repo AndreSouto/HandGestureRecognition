@@ -20,6 +20,7 @@ function featuresExtraction (rb,rt,colr,coll,image,image_orientation)
     thumb_side = thumbDetection (rb,rt,colr,coll,image);
 
     % 3) Finger region detection
-    fingerDetection (rb,rt,colr,coll,image,image_orientation)
+    [a,b] = fingerDetection (image,image_orientation);
+
     % 4) Euclidean distance
 end
