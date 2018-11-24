@@ -3,6 +3,8 @@
 % Usage: [segmented]=imageSegmentation(image_rgb);
 %   Input:
 %     image_rgb - image in RGB color space 
+%     filename - image filename (necessary for 'uniform' or 'complex'
+%     setting)
 %   Output:
 %     segmented - image with hand segmented
 %     rb - bottom border row
@@ -10,24 +12,58 @@
 %     colr - right border column
 %     coll - left border column
 
-function [rb,rt,colr,coll,segmented] = imageSegmentation(image_rgb)
+function [rb,rt,colr,coll,segmented] = imageSegmentation(image_rgb, filename)
     
-    % Converting image from RGB color space to YCbCr
-    image_ycbcr = rgb2ycbcr(image_rgb);
-  
-    % TODO: K-means para clusterizar
-    %%%% for testing purposes only TODO : remove %%%%%%%
-    filename = './images/00000_hand_to_test_only.png';
-    image_seg = imread(filename);
-    [r,c] = size(image_seg);
-    image_seg = im2double(image_seg);
+    % setup of blur and clustering parameters (complex images require more
+    % work)
+    k = strfind(filename,'uniform');
+    if ~isempty(k)
+        nColors = 2;
+        nBlur = 3;
+    else 
+        nColors = 5;
+        nBlur = 7;
+    end
+
+    % create blurred image to eliminate details and improve grouping
+    H = ones(nBlur,nBlur)/(nBlur^2);
+    image_blur = imfilter(image_rgb, H);
+
+    % transform to L*a*b* color space (distance between colors can be
+    % measured using euclidean distance in this color space) 
+    cform = makecform('srgb2lab');
+    image_lab = applycform(image_blur, cform);
+
+    % set clustering parameters 
+    ab = double(image_lab(:,:,2:3));
+    nrows = size(ab,1);
+    ncols = size(ab,2);
+    ab = reshape(ab,nrows*ncols,2);
+
+    % repeat the clustering 10 times to avoid local minima
+    [cluster_idx, cluster_center] = kmeans(ab,nColors,'distance','sqEuclidean', ...
+                                          'Replicates',10);
+    
+    % create clusters grayscale image
+    pixel_labels = reshape(cluster_idx, nrows, ncols);
+    %figure, imshow(pixel_labels,[]), title('image labeled by cluster index');
+    
+    % find cluster number associated with hand color 
+    mean_cluster_value = mean(cluster_center,2);
+    [tmp, idx] = sort(mean_cluster_value);
+    cluster_num = idx(nColors);
+
+    % create segmented image 
+    [r,c] = size(image_rgb(:,:,1));
+    image_seg = ones(r,c);
     for i=1:1:r
         for j=1:1:c
-            if image_seg(i,j) ~= 0
-                image_seg(i,j) = 1.0;
+            if pixel_labels(i,j) ~= cluster_num
+                image_seg(i,j) = 0;
             end
         end
     end
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     % Filling holes in the image
