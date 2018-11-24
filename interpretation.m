@@ -14,7 +14,7 @@ function gesture = interpretation (bits, orientation)
     % Analyzing orientation and bits array
     if strcmp(orientation,'vertical')
         if bits == [1 1 1 1 1]
-            gesture = 'five';
+            gesture = 'Five';
         elseif bits == [0 0 0 0 0]
             gesture = 'A';
         elseif bits == [0 0 0 1 0]
