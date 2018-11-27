@@ -18,10 +18,14 @@
 %                                                 
 
 function main()
- 
+
+    % Vectors
+    choice = [];
+    truth = [];
+
     % Directories of the images
     folder = './test/';
-    subFolder = {'Five','A', 'B', 'Five', 'Point', 'V'};
+    subFolder = {'A', 'B', 'C', 'Five', 'Point', 'V'};
     
     % Variables for accuracy evaluation
     curr_points = 0;
@@ -29,7 +33,7 @@ function main()
     curr_images = 0;
     total_images = 0;
 
-    for i = 1:1:5 
+    for i = 1:1:6 
     
         % Finding folder
         myFolder = [folder subFolder{i}];
@@ -42,7 +46,7 @@ function main()
             % Reading images
             baseFileName = ppmFiles(j).name;
             filename = fullfile(myFolder, baseFileName);
-            %filename = './test/Point/Point-complex15.ppm';
+            %filename = './test/Five/Five-uniform21.ppm';
             image_rgb = imread(filename);
 
             % Hand segmentation
@@ -52,33 +56,91 @@ function main()
             image_orientation = orientationDetection(rb,rt,colr,coll,image_seg);
 
             % Features extraction
-            [thumb_side, ed] = featuresExtraction(rb,rt,colr,coll,image_seg,image_orientation);
+            [thumb_side, ed, no_fingers] = featuresExtraction(rb,rt,colr,coll,image_seg,image_orientation);
+            
+            if isempty(ed) ~= 1
 
-            % Classification and bits generation
-            bits = classification(thumb_side,ed)
+                % Classification and bits generation
+                bits = classification(thumb_side,ed,no_fingers);
 
-            % Interpretation of bits array
-            gesture = interpretation (bits, image_orientation)
+                % Interpretation of bits array
+                gesture = interpretation (bits, image_orientation);
 
-%             % Checking obtained results
-%             if strcmp(gesture,subFolder{i})
-%                 curr_points = curr_points + 1;
-%                 total_points = total_points + 1;
-%             end
-% 
-%             curr_images = curr_images + 1;
-%             total_images = total_images + 1;
-%         end
-%        
-%         % Checking accuracy for each folder
-%         acc = (curr_points * 100)/curr_images;
-%         curr_images = 0;
-%         curr_points = 0;
-%     
-%     end
-% 
-%     % Checking accuracy for all folders
-%     fprintf(1, 'Accuracy for Total Dataset %s\n');
-%     acc = (total_points * 100)/total_images;
+                % Checking obtained results
+                if strcmp(gesture,subFolder{i})
+                    curr_points = curr_points + 1;
+                    total_points = total_points + 1;
+                end
+            
+                if strcmpgesture == 'A'
+                    cho = 1;
+                elseif strcmpgesture == 'B'
+                    cho = 2;
+                elseif strcmpgesture == 'C'
+                    cho = 3;
+                elseif strcmpgesture == 'Five'
+                    cho = 4;
+                elseif strcmpgesture == 'Point'
+                    cho = 5;
+                elseif strcmpgesture == 'V'
+                    cho = 6;
+                elseif strcmpgesture == 'none'
+                    cho = 7;
+                end
+
+                if strcmpsubFolder{i} == 'A'
+                    tru = 1;
+                elseif strcmpsubFolder{i} == 'B'
+                    tru = 2;
+                elseif strcmpsubFolder{i} == 'C'
+                    tru = 3;
+                elseif strcmpsubFolder{i} == 'Five'
+                    tru = 4;
+                elseif strcmpsubFolder{i} == 'Point'
+                    tru = 5;
+                elseif strcmpsubFolder{i} == 'V'
+                    tru = 6;
+                end
+                
+                choice = [choice;cho];
+                truth = [truth;subFolder{i}];
+            
+            else
+            
+                if strcmpsubFolder{i} == 'A'
+                    tru = 1;
+                elseif strcmpsubFolder{i} == 'B'
+                    tru = 2;
+                elseif strcmpsubFolder{i} == 'C'
+                    tru = 3;
+                elseif strcmpsubFolder{i} == 'Five'
+                    tru = 4;
+                elseif subFolder{i} == 'Point'
+                    tru = 5;
+                elseif subFolder{i} == 'V'
+                    tru = 6;
+                end
+
+                choice = [choice;-1];
+                truth = [truth;subFolder{i}];
+
+            end
+            
+            curr_images = curr_images + 1;
+            total_images = total_images + 1;
+            
+        end
+       
+        % Checking accuracy for each folder
+        acc = (curr_points * 100)/curr_images;
+        curr_images = 0;
+        curr_points = 0;
+        fprintf(1, '%.2f%% \n',acc);
+    
+    end
+
+    % Checking accuracy for all folders
+    acc = (total_points * 100)/total_images;
+    fprintf(1, 'Accuracy for Total Dataset %.2f%% \n',acc);
 
 end
