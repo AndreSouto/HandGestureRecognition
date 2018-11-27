@@ -21,7 +21,7 @@ function main()
  
     % Directories of the images
     folder = './test/';
-    subFolder = {'A', 'B', 'Five', 'Point', 'V'};
+    subFolder = {'A', 'B', 'C', 'Five', 'Point', 'V'};
     
     % Variables for accuracy evaluation
     curr_points = 0;
@@ -29,7 +29,7 @@ function main()
     curr_images = 0;
     total_images = 0;
 
-    for i = 1:1:5 
+    for i = 1:1:6 
     
         % Finding folder
         myFolder = [folder subFolder{i}];
