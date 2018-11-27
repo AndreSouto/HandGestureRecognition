@@ -17,9 +17,9 @@ function gesture = interpretation (bits, orientation)
             gesture = 'Five';
         elseif bits == [0 0 0 0 0]
             gesture = 'A';
-        elseif bits == [0 0 0 1 0]
+        elseif bits == [0 1 0 0 0]
             gesture = 'Point';
-        elseif bits == [0 0 1 1 0]
+        elseif bits == [0 1 1 0 0]
             gesture = 'V';
         else
             gesture = 'none';

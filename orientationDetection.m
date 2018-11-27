@@ -25,33 +25,33 @@ function orientation = orientationDetection (rb,rt,colr,coll,image)
         method_one = 'horizontal';
     end
 
-    % Second Method for orientation detection 
-    [r,c] = size(image);
-
-    for j = 1
-        for i = 1:1:r
-            if image(i,j) == 1
-                method_two = 'horizontal';
-                break;
-            end
-        end
-    end
-
-    for i = r
-        for j = 1:1:c
-            if image(i,j) == 1
-                method_two = 'vertical';
-                break;
-            end
-        end
-    end
-
-    % if both methods agree, so there is a orientation of the hand
-    if strcmp(method_one, method_two)
+%     % Second Method for orientation detection 
+%     [r,c] = size(image);
+% 
+%     for j = 1
+%         for i = 1:1:r
+%             if image(i,j) == 1
+%                 method_two = 'horizontal';
+%                 break;
+%             end
+%         end
+%     end
+% 
+%     for i = r
+%         for j = 1:1:c
+%             if image(i,j) == 1
+%                 method_two = 'vertical';
+%                 break;
+%             end
+%         end
+%     end
+% 
+%     % if both methods agree, so there is a orientation of the hand
+%     if strcmp(method_one, method_two)
         orientation = method_one;
-    % if not, an error is raised
-    else
-        error('Problems to determine hand orientation. Methods do not match.')
-    end
+%     % if not, an error is raised
+%     else
+%         error('Problems to determine hand orientation. Methods do not match.')
+%     end
 
 end

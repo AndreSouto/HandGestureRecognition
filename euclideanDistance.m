@@ -13,6 +13,7 @@
 
 function ed = euclideanDistance (x,y,crow,ccol)
     
+    ed = [];
     [r,c] = size(x);
 
     for i = 1:1:c

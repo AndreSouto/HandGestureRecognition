@@ -20,7 +20,7 @@ for i = 1:1:61
 
     image = imread(filename);
 
-    image = rot90(rot90(rot90(image)));
+    image = rot90(image);
 
     imwrite(image,filename);
 

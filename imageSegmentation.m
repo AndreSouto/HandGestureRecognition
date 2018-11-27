@@ -1,6 +1,6 @@
 % Function imageSegmentation: Performs image segmentation
 %
-% Usage: [segmented]=imageSegmentation(image_rgb);
+% Usage: [segmented]=imageSegmentation(image_rgb,filename);
 %   Input:
 %     image_rgb - image in RGB color space 
 %     filename - image filename (necessary for 'uniform' or 'complex'
@@ -63,8 +63,6 @@ function [rb,rt,colr,coll,segmented] = imageSegmentation(image_rgb, filename)
             end
         end
     end
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     % Filling holes in the image
     image_seg = imfill(image_seg);
