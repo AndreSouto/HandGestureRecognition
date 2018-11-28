@@ -19,10 +19,6 @@
 
 function main()
 
-    % Vectors
-    choice = [];
-    truth = [];
-
     % Directories of the images
     folder = './test/';
     subFolder = {'A', 'B', 'C', 'Five', 'Point', 'V'};
@@ -72,58 +68,6 @@ function main()
                     total_points = total_points + 1;
                 end
             
-                if strcmp(gesture,'A')
-                    cho = 1;
-                elseif strcmp(gesture,'B')
-                    cho = 2;
-                elseif strcmp(gesture,'C')
-                    cho = 3;
-                elseif strcmp(gesture,'Five')
-                    cho = 4;
-                elseif strcmp(gesture,'Point')
-                    cho = 5;
-                elseif strcmp(gesture, 'V')
-                    cho = 6;
-                elseif strcmp(gesture , 'none')
-                    cho = 7;
-                end
-
-                if strcmp(subFolder{i} , 'A')
-                    tru = 1;
-                elseif strcmp(subFolder{i} , 'B')
-                    tru = 2;
-                elseif strcmp(subFolder{i} , 'C')
-                    tru = 3;
-                elseif strcmp(subFolder{i} , 'Five')
-                    tru = 4;
-                elseif strcmp(subFolder{i} , 'Point')
-                    tru = 5;
-                elseif strcmp(subFolder{i} , 'V')
-                    tru = 6;
-                end
-                
-                choice = [choice;cho];
-                truth = [truth;tru];
-            
-            else
-            
-                if strcmp(subFolder{i} , 'A')
-                    tru = 1;
-                elseif strcmp(subFolder{i} , 'B')
-                    tru = 2;
-                elseif strcmp(subFolder{i} , 'C')
-                    tru = 3;
-                elseif strcmp(subFolder{i} , 'Five')
-                    tru = 4;
-                elseif strcmp(subFolder{i} , 'Point')
-                    tru = 5;
-                elseif strcmp(subFolder{i} , 'V')
-                    tru = 6;
-                end
-
-                choice = [choice;-1];
-                truth = [truth;tru];
-
             end
             
             curr_images = curr_images + 1;
